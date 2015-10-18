@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearlayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/darker_gray"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/inputip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:hint="Input Server IP"
+            android:focusable="false"
+             />
+
+        <Button
+            android:id="@+id/connection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="连接" />
+
+    </LinearLayout>
+	
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_weight="18"
+        android:layout_height="0sp"
+        android:listSelector="@null" 
+        android:transcriptMode="alwaysScroll" 
+        android:cacheColorHint="#00000000" 
+        android:divider="@null" 
+         >
+        
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:background="@android:color/darker_gray"
+        >
+        
+        <ToggleButton
+            android:id="@+id/toggle"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="16sp"
+            android:textOn="From"
+            android:textOff="To"
+            />
+
+        <EditText
+            android:id="@+id/edit"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:focusable="false"
+            />
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:text="Send" />
+        
+        "
+    </LinearLayout>
+
+</LinearLayout>
