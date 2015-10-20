@@ -68,20 +68,27 @@ public class MainActivity extends Activity implements OnClickListener{
     private void connectServer(){
     	String ip = inputIP.getText().toString().trim();
     	int port = 54321;
-    	try {
-			client = new Socket(ip,port);
-			Log.i("Andy", "connect");
-			
-			br = new BufferedReader(new InputStreamReader(client.getInputStream()));
-			new Thread(mRunnable).start();
-			
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	
+    	if(client != null){
+    		try {
+    			client = new Socket(ip,port);
+    			Log.i("Andy", "connect");
+    			
+    			br = new BufferedReader(new InputStreamReader(client.getInputStream()));
+    			new Thread(mRunnable).start();
+    			
+    		} catch (UnknownHostException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		} catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    	}else{
+    		Log.i("Andy", "has connected to server!");
+    	}
+    	
+    	
     }
     
     private void initWidget(){
