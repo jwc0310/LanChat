@@ -17,7 +17,7 @@ public final class R {
     }
     public static final class id {
         public static final int button1=0x7f06000b;
-        public static final int connection=0x7f060002;
+        public static final int connect=0x7f060002;
         public static final int content=0x7f060008;
         public static final int edit=0x7f060005;
         public static final int editText1=0x7f06000a;

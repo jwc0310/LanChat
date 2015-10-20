@@ -17,11 +17,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:hint="Input Server IP"
-            android:focusable="false"
              />
 
         <Button
-            android:id="@+id/connection"
+            android:id="@+id/connect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -66,7 +65,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="18sp"
-            android:focusable="false"
             />
 
         <Button
