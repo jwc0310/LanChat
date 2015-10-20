@@ -52,8 +52,20 @@ public class MainActivity extends Activity implements OnClickListener{
         
         initWidget();
         
-        
     }
+    
+    private void initWidget(){
+    	inputIP = (TextView)findViewById(R.id.inputip);
+    	connect = (Button)findViewById(R.id.connect);
+    	send = (Button)findViewById(R.id.send);
+    	list = (ListView)findViewById(R.id.list);
+    	edit = (TextView)findViewById(R.id.edit);
+    	
+    	connect.setOnClickListener(this);
+    	send.setOnClickListener(this);
+    }
+    
+    
     private void sendMessage(String str){
     	Log.i("Andy", str);
     	try {
@@ -65,6 +77,41 @@ public class MainActivity extends Activity implements OnClickListener{
     	out.println(str);
     	out.flush();
     }
+
+    Runnable mRunnable = new Runnable(){
+    	@Override
+    	public void run() {
+    		// TODO Auto-generated method stub
+    		String str = null;
+    		while(true){
+    			Log.i("Andy", "true");
+    			try{
+    				if((str = br.readLine())!= null){
+    					Log.i("Andy", str+="\n");
+    				}
+    			}catch(Exception e){
+    				e.printStackTrace();
+    			}
+    		}
+    		
+    	}
+    };
+    
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch(v.getId()){
+		
+		case R.id.connect:
+			connectServer();
+			break;
+		case R.id.send:
+			sendMessage(edit.getText().toString());
+			break;
+		}
+	}
+	
     private void connectServer(){
     	String ip = inputIP.getText().toString().trim();
     	int port = 54321;
@@ -87,53 +134,9 @@ public class MainActivity extends Activity implements OnClickListener{
     	}else{
     		Log.i("Andy", "has connected to server!");
     	}
-    	
-    	
     }
-    
-    private void initWidget(){
-    	inputIP = (TextView)findViewById(R.id.inputip);
-    	connect = (Button)findViewById(R.id.connect);
-    	send = (Button)findViewById(R.id.send);
-    	list = (ListView)findViewById(R.id.list);
-    	edit = (TextView)findViewById(R.id.edit);
-    	
-    	connect.setOnClickListener(this);
-    	send.setOnClickListener(this);
-    }
-    Runnable mRunnable = new Runnable(){
-    	@Override
-    	public void run() {
-    		// TODO Auto-generated method stub
-    		String str = null;
-    		while(true){
-    			Log.i("Andy", "true");
-    			try{
-    				if((str = br.readLine())!= null){
-    					Log.i("Andy", str+="\n");
-    				}
-    			}catch(Exception e){
-    				e.printStackTrace();
-    			}
-    		}
-    		
-    	}
-    };
     
 	
-
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		switch(v.getId()){
-		case R.id.connect:
-			connectServer();
-			break;
-		case R.id.send:
-			
-			sendMessage(edit.getText().toString());
-			break;
-		}
-		
-	}
+	
+	
 }
