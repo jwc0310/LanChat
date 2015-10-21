@@ -8,9 +8,14 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
@@ -27,12 +32,14 @@ public class MainActivity extends Activity implements OnClickListener{
 	private Button connect,send;
 	private EditText et;
 	private TextView inputIP,edit;
+	private List<MessageVo> messageList = new ArrayList<MessageVo>();
 	private ListView list;
 	
 	private static Socket client = null;
 	PrintWriter out=null;
 	BufferedReader br = null;
 	
+	MessageAdapter myAdapter = new MessageAdapter(this,messageList);
 	
 	
     @Override
@@ -51,6 +58,8 @@ public class MainActivity extends Activity implements OnClickListener{
 		}
         
         initWidget();
+        
+        list.setAdapter(myAdapter);
         
     }
     
@@ -88,6 +97,15 @@ public class MainActivity extends Activity implements OnClickListener{
     			try{
     				if((str = br.readLine())!= null){
     					Log.i("Andy", str+="\n");
+
+    					SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
+    					String time = sdf.format(new Date()).toString();
+    					Log.i("time----:", time);
+    					
+    					if(str != null){
+    						messageList.add(new MessageVo(MessageVo.MESSAGE_TO,str,time));
+    						myAdapter.notifyDataSetChanged();
+    					}
     				}
     			}catch(Exception e){
     				e.printStackTrace();
@@ -97,7 +115,6 @@ public class MainActivity extends Activity implements OnClickListener{
     	}
     };
     
-
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -107,7 +124,20 @@ public class MainActivity extends Activity implements OnClickListener{
 			connectServer();
 			break;
 		case R.id.send:
-			sendMessage(edit.getText().toString());
+			String sendMessage = edit.getText().toString();
+			sendMessage(sendMessage);
+			SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
+			String time = sdf.format(new Date()).toString();
+			Log.i("time----:", time);
+			
+			if(sendMessage != null){
+				messageList.add(new MessageVo(MessageVo.MESSAGE_TO,sendMessage,time));
+				myAdapter.notifyDataSetChanged();
+			}
+			edit.setText("");
+			
+			
+			
 			break;
 		}
 	}
