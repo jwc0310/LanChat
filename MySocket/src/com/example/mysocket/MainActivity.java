@@ -103,7 +103,7 @@ public class MainActivity extends Activity implements OnClickListener{
     					Log.i("time----:", time);
     					
     					if(str != null){
-    						messageList.add(new MessageVo(MessageVo.MESSAGE_TO,str,time));
+    						messageList.add(new MessageVo(MessageVo.MESSAGE_FROM,str,time));
     						myAdapter.notifyDataSetChanged();
     					}
     				}
@@ -146,7 +146,7 @@ public class MainActivity extends Activity implements OnClickListener{
     	String ip = inputIP.getText().toString().trim();
     	int port = 54321;
     	
-    	if(client != null){
+    	if(client == null){
     		try {
     			client = new Socket(ip,port);
     			Log.i("Andy", "connect");

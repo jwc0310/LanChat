@@ -15,7 +15,6 @@ public class Server implements Runnable {
 		// TODO Auto-generated method stub
 		try{
 			
-			
 			ServerSocket serverSocket = new ServerSocket(54321);
 			while(true){
 				//接受客户端请求
