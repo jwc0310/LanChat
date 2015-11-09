@@ -23,13 +23,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
-public class MainActivity extends Activity implements OnClickListener{
+public class MainActivity extends Activity implements OnClickListener,OnCheckedChangeListener{
 
 	private Button connect,send;
+	private ToggleButton toggle;
 	private EditText et;
 	private TextView inputIP,edit;
 	private List<MessageVo> messageList = new ArrayList<MessageVo>();
@@ -69,6 +73,7 @@ public class MainActivity extends Activity implements OnClickListener{
     	send = (Button)findViewById(R.id.send);
     	list = (ListView)findViewById(R.id.list);
     	edit = (TextView)findViewById(R.id.edit);
+    	toggle = (ToggleButton)findViewById(R.id.toggle);
     	
     	connect.setOnClickListener(this);
     	send.setOnClickListener(this);
@@ -165,6 +170,17 @@ public class MainActivity extends Activity implements OnClickListener{
     		Log.i("Andy", "has connected to server!");
     	}
     }
+
+	@Override
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		// TODO Auto-generated method stub
+		if(isChecked){
+			
+		}
+		else{
+			
+		}
+	}
     
 	
 	

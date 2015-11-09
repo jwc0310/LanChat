@@ -55,11 +55,18 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textSize="16sp"
-            android:textOn="From"
-            android:textOff="To"
+            android:checked="true"
+            android:textOn="MSG"
+            android:textOff="VOI"
             />
-
-        <EditText
+		<LinearLayout
+		    android:id="@+id/input"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    >"
+		    
+		    <EditText
             android:id="@+id/edit"
             android:layout_width="210dp"
             android:layout_height="wrap_content"
@@ -67,15 +74,30 @@
             android:textSize="18sp"
             />
 
-        <Button
-            android:id="@+id/send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textSize="20sp"
-            android:text="Send" />
+	        <Button
+	            android:id="@+id/send"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textSize="20sp"
+	            android:text="Send" />
+		    
+		</LinearLayout>
+		
+		<LinearLayout
+		    android:id="@+id/voice"
+		    android:layout_width="wrap_content"
+		    android:layout_height="fill_parent"
+		    android:orientation="horizontal"
+		    android:visibility="gone"
+		     >
+		   <Button
+		       android:id="@+id/input_voice"
+		       android:layout_height="fill_parent"
+		       android:layout_width="wrap_content"
+		       android:text="按住说话"
+		        />
+		</LinearLayout>
         
-        "
     </LinearLayout>
 
 </LinearLayout>
