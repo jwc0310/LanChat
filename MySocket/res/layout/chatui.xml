@@ -60,18 +60,18 @@
             android:textOff="VOI"
             />
 		<LinearLayout
-		    android:id="@+id/input"
+		    android:id="@+id/ll_input"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:orientation="horizontal"
 		    >"
 		    
 		    <EditText
-            android:id="@+id/edit"
-            android:layout_width="210dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="18sp"
+	            android:id="@+id/edit"
+	            android:layout_width="210dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:textSize="18sp"
             />
 
 	        <Button
@@ -84,7 +84,7 @@
 		</LinearLayout>
 		
 		<LinearLayout
-		    android:id="@+id/voice"
+		    android:id="@+id/ll_voice"
 		    android:layout_width="wrap_content"
 		    android:layout_height="fill_parent"
 		    android:orientation="horizontal"

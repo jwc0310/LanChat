@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -38,6 +39,8 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
 	private TextView inputIP,edit;
 	private List<MessageVo> messageList = new ArrayList<MessageVo>();
 	private ListView list;
+	
+	LinearLayout ll_input,ll_voice;
 	
 	private static Socket client = null;
 	PrintWriter out=null;
@@ -74,9 +77,12 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
     	list = (ListView)findViewById(R.id.list);
     	edit = (TextView)findViewById(R.id.edit);
     	toggle = (ToggleButton)findViewById(R.id.toggle);
+    	ll_input = (LinearLayout)findViewById(R.id.ll_input);
+    	ll_voice = (LinearLayout)findViewById(R.id.ll_voice);
     	
     	connect.setOnClickListener(this);
     	send.setOnClickListener(this);
+    	toggle.setOnCheckedChangeListener(this);
     }
     
     
@@ -175,10 +181,14 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		// TODO Auto-generated method stub
 		if(isChecked){
-			
+			Log.i("Andy", "TRUE");
+			ll_input.setVisibility(View.VISIBLE);
+			ll_voice.setVisibility(View.GONE);
 		}
 		else{
-			
+			Log.i("Andy", "FALSE");
+			ll_input.setVisibility(View.GONE);
+			ll_voice.setVisibility(View.VISIBLE);
 		}
 	}
     
