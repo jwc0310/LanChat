@@ -20,8 +20,10 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -31,9 +33,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-public class MainActivity extends Activity implements OnClickListener,OnCheckedChangeListener{
+public class MainActivity extends Activity implements OnClickListener,OnCheckedChangeListener,OnTouchListener{
 
-	private Button connect,send;
+	private Button connect,send,input_voice;
 	private ToggleButton toggle;
 	private EditText et;
 	private TextView inputIP,edit;
@@ -79,10 +81,12 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
     	toggle = (ToggleButton)findViewById(R.id.toggle);
     	ll_input = (LinearLayout)findViewById(R.id.ll_input);
     	ll_voice = (LinearLayout)findViewById(R.id.ll_voice);
+    	input_voice = (Button)findViewById(R.id.input_voice);
     	
     	connect.setOnClickListener(this);
     	send.setOnClickListener(this);
     	toggle.setOnCheckedChangeListener(this);
+    	input_voice.setOnTouchListener(this);
     }
     
     
@@ -190,6 +194,22 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
 			ll_input.setVisibility(View.GONE);
 			ll_voice.setVisibility(View.VISIBLE);
 		}
+	}
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		// TODO Auto-generated method stub
+		switch(v.getId()){
+		case R.id.input_voice:
+			if(event.getAction() == MotionEvent.ACTION_UP){
+				Log.i("Andy", "MotionEvent.ACTION_UP");
+			}
+			if(event.getAction() == MotionEvent.ACTION_DOWN){
+				Log.i("Andy", "MotionEvent.ACTION_DOWN");
+			}
+			break;
+		}
+		return false;
 	}
     
 	

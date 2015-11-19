@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener {
 
@@ -76,15 +77,16 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     
-    
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch(v.getId()){
 		case R.id.open:
 			Log.i("Andy"," Click open button! ");
+			
 			if(mServerSocket == null){
 				Log.i("Andy","create thread ! ");
+				Toast.makeText(getApplication(), "Service Install", Toast.LENGTH_SHORT).show();
 				new Thread(openRun).start();
 			}else{
 				Log.i("Andy","has created! ");
@@ -95,12 +97,12 @@ public class MainActivity extends Activity implements OnClickListener {
 			Log.i("Andy"," Click close button! ");
 			try {
 				mServerSocket.close();
+				Toast.makeText(getApplication(), "Service unInstall", Toast.LENGTH_SHORT).show();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
-			
 			
 		case R.id.button1:
 			for(Socket client : mClientList){
@@ -113,9 +115,9 @@ public class MainActivity extends Activity implements OnClickListener {
 				mPrintWriter.println("hello");
 				mPrintWriter.flush();
 				Log.i("Andy", "hello");
-		}
+				mPrintWriter.close();
+			}
 			break;
-			
 			
 		}
 	}
@@ -207,25 +209,25 @@ public class MainActivity extends Activity implements OnClickListener {
 					
 				}
 			*/
-					try {
-						while((mStrMSG = mBufferedReader.readLine())!=null){
-							Log.i("Andy", mStrMSG);
-							if(mStrMSG.trim().equals("exit")){
-								mStrMSG="user: "+this.mClient.getInetAddress()+"exit total:"+mClientList.size();
-								mClientList.remove(mClient);
-								mBufferedReader.close();
-								mPrintWriter.close();
-								mClient.close();
-							}else{
-								mStrMSG = mClient.getInetAddress()+":"+mStrMSG; 
-								
-								sendMessage();
-							}
-						}
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+			try {
+				while((mStrMSG = mBufferedReader.readLine())!=null){
+					Log.i("Andy", mStrMSG);
+					if(mStrMSG.trim().equals("exit")){
+						mStrMSG="user: "+this.mClient.getInetAddress()+"exit total:"+mClientList.size();
+						mClientList.remove(mClient);
+						mBufferedReader.close();
+						mPrintWriter.close();
+						mClient.close();
+					}else{
+						mStrMSG = mClient.getInetAddress()+":"+mStrMSG; 
+						
+						sendMessage();
 					}
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	
 	}
