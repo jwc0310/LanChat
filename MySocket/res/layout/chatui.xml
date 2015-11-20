@@ -44,68 +44,64 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="10dp"
         android:background="@android:color/darker_gray"
-        >
-        
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
         <ToggleButton
             android:id="@+id/toggle"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:textSize="16sp"
+            android:layout_height="wrap_content"
             android:checked="true"
-            android:textOn="MSG"
             android:textOff="VOI"
-            />
-		<LinearLayout
-		    android:id="@+id/ll_input"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:orientation="horizontal"
-		    >"
-		    
-		    <EditText
-	            android:id="@+id/edit"
-	            android:layout_width="210dp"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1"
-	            android:textSize="18sp"
-            />
+            android:textOn="MSG"
+            android:textSize="16sp" />
 
-	        <Button
-	            android:id="@+id/send"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:textSize="20sp"
-	            android:text="Send" />
-		    
-		</LinearLayout>
-		
-		<FrameLayout
-		    android:id="@+id/ll_voice"
-		    android:layout_width="wrap_content"
-		    android:layout_height="fill_parent"
-		    android:orientation="horizontal"
-		    android:visibility="gone"
-		     >
-		   <com.example.view.AudioRecordButton
-		       android:id="@+id/input_voice"
-		       android:layout_height="fill_parent"
-		       android:layout_width="wrap_content"
-		       android:layout_marginBottom="5dp"
-		       android:layout_marginLeft="20dp"
-		       android:layout_marginRight="20dp"
-		       android:layout_marginTop="5dp"
-		       android:background="@drawable/btn_recorder_normal"
-		       android:gravity="center"
-		       android:padding="5dp"
-		       android:text="@string/btn_recorder_normal"
-		       android:textColor="#727272"
-		        />
-		</FrameLayout>
-        
+        <LinearLayout
+            android:id="@+id/ll_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+             >
+
+            <EditText
+                android:id="@+id/edit"
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/ll_voice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            >
+            <!-- android:layout_weight="0.81" -->
+
+            <com.example.view.AudioRecordButton
+                android:id="@+id/input_voice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/btn_recorder_normal"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/btn_recorder_normal"
+                android:textColor="#727272" />
+        </FrameLayout>
     </LinearLayout>
 
 </LinearLayout>

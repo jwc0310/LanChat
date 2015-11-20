@@ -44,7 +44,7 @@ public class MyAudioManager{
 	
 	public void prepareAudio(){
 	try{
-			Log.i("Andy","prepareAudio() --1");
+			//Log.i("Andy","prepareAudio() --1");
 			isPrepared = false;
 			File fileDir = new File(dir);
 			if(!fileDir.exists()){
@@ -67,20 +67,20 @@ public class MyAudioManager{
 			mRecorder.start();
 			
 			isPrepared = true;
-			Log.i("Andy","prepareAudio() --2");
+			//Log.i("Andy","prepareAudio() --2");
 			if(audioStateChangeListener != null){
-				Log.i("Andy","audioStateChangeListener.wellPrepared();");
+				//Log.i("Andy","audioStateChangeListener.wellPrepared();");
 				audioStateChangeListener.wellPrepared();
 			}else{
 				Log.i("Andy","audioStateChangeListener == null");
 			}
-			Log.i("Andy","prepareAudio() --3");
+			//Log.i("Andy","prepareAudio() --3");
 		}catch(Exception e){
-			Log.i("Andy","prepareAudio() --3 -1");
+			//Log.i("Andy","prepareAudio() --3 -1");
 			e.printStackTrace();
 		}
 		
-		Log.i("Andy","prepareAudio() --4");
+		//Log.i("Andy","prepareAudio() --4");
 	}
 		
 	//随机产生文件名称

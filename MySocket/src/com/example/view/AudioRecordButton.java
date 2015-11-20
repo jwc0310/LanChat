@@ -53,9 +53,7 @@ public class AudioRecordButton extends Button {
 			public boolean onLongClick(View v) {
 				// TODO Auto-generated method stub
 				isReady = true;
-				Log.i("Andy", "start record ----1");
 				audioManager.prepareAudio();
-				Log.i("Andy", "start record ----2");
 				return false;
 			}
 			
