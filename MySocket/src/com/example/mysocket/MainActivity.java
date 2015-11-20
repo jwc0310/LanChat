@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.example.view.AudioRecordButton;
+import com.example.view.AudioRecordButton.AudioRecordFinishListener;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,21 +31,24 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-public class MainActivity extends Activity implements OnClickListener,OnCheckedChangeListener,OnTouchListener{
+public class MainActivity extends Activity implements OnClickListener,OnCheckedChangeListener{
 
-	private Button connect,send,input_voice;
+	private Button connect,send;
+	private AudioRecordButton input_voice;
 	private ToggleButton toggle;
 	private EditText et;
 	private TextView inputIP,edit;
 	private List<MessageVo> messageList = new ArrayList<MessageVo>();
 	private ListView list;
 	
-	LinearLayout ll_input,ll_voice;
+	LinearLayout ll_input;
+	FrameLayout ll_voice;
 	
 	private static Socket client = null;
 	PrintWriter out=null;
@@ -80,16 +86,25 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
     	edit = (TextView)findViewById(R.id.edit);
     	toggle = (ToggleButton)findViewById(R.id.toggle);
     	ll_input = (LinearLayout)findViewById(R.id.ll_input);
-    	ll_voice = (LinearLayout)findViewById(R.id.ll_voice);
-    	input_voice = (Button)findViewById(R.id.input_voice);
+    	ll_voice = (FrameLayout)findViewById(R.id.ll_voice);
+    	input_voice = (AudioRecordButton)findViewById(R.id.input_voice);
     	
     	connect.setOnClickListener(this);
     	send.setOnClickListener(this);
     	toggle.setOnCheckedChangeListener(this);
-    	input_voice.setOnTouchListener(this);
+    	input_voice.setOnAudioRecordFinishListener(new MyAudioRecordFinishListener());
     }
     
-    
+    class MyAudioRecordFinishListener implements AudioRecordFinishListener {
+
+		@Override
+		public void onFinish(float second, String filePath) {
+			// TODO Auto-generated method stub
+			Log.i("Andy","time is "+second);
+			Log.i("Andy","filePath "+filePath);
+		}
+
+	}
     private void sendMessage(String str){
     	Log.i("Andy", str);
     	try {
@@ -150,9 +165,6 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
 				myAdapter.notifyDataSetChanged();
 			}
 			edit.setText("");
-			
-			
-			
 			break;
 		}
 	}
@@ -185,34 +197,15 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		// TODO Auto-generated method stub
 		if(isChecked){
-			Log.i("Andy", "TRUE");
+			Log.i("Andy", "font input");
 			ll_input.setVisibility(View.VISIBLE);
 			ll_voice.setVisibility(View.GONE);
 		}
 		else{
-			Log.i("Andy", "FALSE");
+			Log.i("Andy", "voice input");
 			ll_input.setVisibility(View.GONE);
 			ll_voice.setVisibility(View.VISIBLE);
 		}
 	}
-
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		// TODO Auto-generated method stub
-		switch(v.getId()){
-		case R.id.input_voice:
-			if(event.getAction() == MotionEvent.ACTION_UP){
-				Log.i("Andy", "MotionEvent.ACTION_UP");
-			}
-			if(event.getAction() == MotionEvent.ACTION_DOWN){
-				Log.i("Andy", "MotionEvent.ACTION_DOWN");
-			}
-			break;
-		}
-		return false;
-	}
-    
-	
-	
 	
 }

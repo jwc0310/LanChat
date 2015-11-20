@@ -83,20 +83,28 @@
 		    
 		</LinearLayout>
 		
-		<LinearLayout
+		<FrameLayout
 		    android:id="@+id/ll_voice"
 		    android:layout_width="wrap_content"
 		    android:layout_height="fill_parent"
 		    android:orientation="horizontal"
 		    android:visibility="gone"
 		     >
-		   <Button
+		   <com.example.view.AudioRecordButton
 		       android:id="@+id/input_voice"
 		       android:layout_height="fill_parent"
 		       android:layout_width="wrap_content"
-		       android:text="按住说话"
+		       android:layout_marginBottom="5dp"
+		       android:layout_marginLeft="20dp"
+		       android:layout_marginRight="20dp"
+		       android:layout_marginTop="5dp"
+		       android:background="@drawable/btn_recorder_normal"
+		       android:gravity="center"
+		       android:padding="5dp"
+		       android:text="@string/btn_recorder_normal"
+		       android:textColor="#727272"
 		        />
-		</LinearLayout>
+		</FrameLayout>
         
     </LinearLayout>
 

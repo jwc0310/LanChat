@@ -11,16 +11,40 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int chatfrom_bg_normal=0x7f020000;
-        public static final int chatto_bg_normal=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
+        public static final int anim_play_audio=0x7f020000;
+        public static final int btn_recorder_normal=0x7f020001;
+        public static final int btn_recorder_record=0x7f020002;
+        public static final int chatfrom_bg_normal=0x7f020003;
+        public static final int chatto_bg_normal=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int icon_dialog_background=0x7f020006;
+        public static final int icon_dialog_cancel=0x7f020007;
+        public static final int icon_dialog_length_short=0x7f020008;
+        public static final int icon_dialog_recording=0x7f020009;
+        public static final int icon_play_1=0x7f02000a;
+        public static final int icon_play_2=0x7f02000b;
+        public static final int icon_play_3=0x7f02000c;
+        public static final int icon_voice_anim_1=0x7f02000d;
+        public static final int icon_voice_anim_2=0x7f02000e;
+        public static final int icon_voice_anim_3=0x7f02000f;
+        public static final int icon_voice_background=0x7f020010;
+        public static final int icon_voice_ripple=0x7f020011;
+        public static final int icon_volume_1=0x7f020012;
+        public static final int icon_volume_2=0x7f020013;
+        public static final int icon_volume_3=0x7f020014;
+        public static final int icon_volume_4=0x7f020015;
+        public static final int icon_volume_5=0x7f020016;
+        public static final int icon_volume_6=0x7f020017;
+        public static final int icon_volume_7=0x7f020018;
     }
     public static final class id {
-        public static final int button1=0x7f06000e;
+        public static final int button1=0x7f060011;
         public static final int connect=0x7f060002;
-        public static final int content=0x7f06000b;
+        public static final int content=0x7f06000e;
         public static final int edit=0x7f060006;
-        public static final int editText1=0x7f06000d;
+        public static final int editText1=0x7f060010;
+        public static final int imageRecord=0x7f06000a;
+        public static final int imageVolume=0x7f06000b;
         public static final int input_voice=0x7f060009;
         public static final int inputip=0x7f060001;
         public static final int linearlayout1=0x7f060000;
@@ -28,18 +52,24 @@ public final class R {
         public static final int ll_input=0x7f060005;
         public static final int ll_voice=0x7f060008;
         public static final int send=0x7f060007;
-        public static final int textView1=0x7f06000c;
-        public static final int time=0x7f06000a;
+        public static final int textHint=0x7f06000c;
+        public static final int textView1=0x7f06000f;
+        public static final int time=0x7f06000d;
         public static final int toggle=0x7f060004;
     }
     public static final class layout {
         public static final int chatui=0x7f030000;
-        public static final int from_item=0x7f030001;
-        public static final int mainui=0x7f030002;
-        public static final int to_item=0x7f030003;
+        public static final int dialog=0x7f030001;
+        public static final int from_item=0x7f030002;
+        public static final int mainui=0x7f030003;
+        public static final int to_item=0x7f030004;
     }
     public static final class string {
+        public static final int action_settings=0x7f040002;
         public static final int app_name=0x7f040000;
+        public static final int btn_recorder_normal=0x7f040003;
+        public static final int btn_recorder_recording=0x7f040004;
+        public static final int btn_recorder_want_cancel=0x7f040005;
         public static final int hello_world=0x7f040001;
     }
     public static final class style {
@@ -69,5 +99,6 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f050001;
+        public static final int Theme_RecorderDialog=0x7f050002;
     }
 }
