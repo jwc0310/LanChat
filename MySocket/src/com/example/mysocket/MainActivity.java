@@ -16,6 +16,7 @@ import java.util.List;
 import com.example.view.AudioRecordButton;
 import com.example.view.AudioRecordButton.AudioRecordFinishListener;
 
+import Tools.Tools;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,6 +36,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class MainActivity extends Activity implements OnClickListener,OnCheckedChangeListener{
@@ -102,6 +104,9 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
 			// TODO Auto-generated method stub
 			Log.i("Andy","time is "+second);
 			Log.i("Andy","filePath "+filePath);
+			Toast.makeText(getApplication(), "time is "+second+"filePath "+filePath, Toast.LENGTH_LONG).show();
+			messageList.add(new MessageVo(MessageVo.MESSAGE_TO,filePath+","+String.valueOf(Math.ceil(second)),Tools.getCurrentTime(),MessageVo.MESSAGE_MSG));
+			myAdapter.notifyDataSetChanged();
 		}
 
 	}
@@ -128,12 +133,11 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
     				if((str = br.readLine())!= null){
     					Log.i("Andy", str+="\n");
 
-    					SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
-    					String time = sdf.format(new Date()).toString();
+    					String time = Tools.getCurrentTime();
     					Log.i("time----:", time);
     					
     					if(str != null){
-    						messageList.add(new MessageVo(MessageVo.MESSAGE_FROM,str,time));
+    						messageList.add(new MessageVo(MessageVo.MESSAGE_FROM,str,time,MessageVo.MESSAGE_MSG));
     						myAdapter.notifyDataSetChanged();
     					}
     				}
@@ -156,12 +160,11 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
 		case R.id.send:
 			String sendMessage = edit.getText().toString();
 			sendMessage(sendMessage);
-			SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
-			String time = sdf.format(new Date()).toString();
+			String time = Tools.getCurrentTime();
 			Log.i("time----:", time);
 			
 			if(sendMessage != null){
-				messageList.add(new MessageVo(MessageVo.MESSAGE_TO,sendMessage,time));
+				messageList.add(new MessageVo(MessageVo.MESSAGE_TO,sendMessage,time,MessageVo.MESSAGE_MSG));
 				myAdapter.notifyDataSetChanged();
 			}
 			edit.setText("");
@@ -207,5 +210,7 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
 			ll_voice.setVisibility(View.VISIBLE);
 		}
 	}
+	
+	
 	
 }

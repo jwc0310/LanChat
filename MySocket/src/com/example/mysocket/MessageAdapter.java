@@ -20,7 +20,7 @@ public class MessageAdapter extends BaseAdapter {
 		this.context = context;
 		this.messageVo = messageVo;
 	}
-	
+
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -45,27 +45,36 @@ public class MessageAdapter extends BaseAdapter {
 		
 		ViewHolder holder = null;
 		MessageVo message = messageVo.get(position);
-		
-		if( convertView == null || (holder = (ViewHolder)convertView.getTag()).flag != message.getDir()){
-			holder = new ViewHolder();
-			if(message.getDir() == MessageVo.MESSAGE_FROM){
-				holder.flag = MessageVo.MESSAGE_FROM;
-				convertView = LayoutInflater.from(context).inflate(R.layout.from_item, null);
+		int type = message.getType();
+		switch(type){
+		case MessageVo.MESSAGE_MSG:
+			if( convertView == null || (holder = (ViewHolder)convertView.getTag()).flag != message.getDir()){
+				holder = new ViewHolder();
+				if(message.getDir() == MessageVo.MESSAGE_FROM){
+					holder.flag = MessageVo.MESSAGE_FROM;
+					convertView = LayoutInflater.from(context).inflate(R.layout.from_item, null);
+				}else{
+					holder.flag = MessageVo.MESSAGE_TO;
+					convertView = LayoutInflater.from(context).inflate(R.layout.to_item, null);
+				}
+				
+				holder.content = (TextView)convertView.findViewById(R.id.content);
+				holder.time = (TextView)convertView.findViewById(R.id.time);
+				convertView.setTag(holder);
+				
 			}else{
-				holder.flag = MessageVo.MESSAGE_TO;
-				convertView = LayoutInflater.from(context).inflate(R.layout.to_item, null);
+				holder = (ViewHolder)convertView.getTag();
 			}
 			
-			holder.content = (TextView)convertView.findViewById(R.id.content);
-			holder.time = (TextView)convertView.findViewById(R.id.time);
-			convertView.setTag(holder);
+			holder.content.setText(message.getContent());
+			holder.time.setText(message.getTime());
+			break;
+		case MessageVo.MESSAGE_AUD:
 			
-		}else{
-			holder = (ViewHolder)convertView.getTag();
+			break;
+		case MessageVo.MESSAGE_PIC:
+			break;
 		}
-		
-		holder.content.setText(message.getContent());
-		holder.time.setText(message.getTime());
 		
 		return convertView;
 	}
