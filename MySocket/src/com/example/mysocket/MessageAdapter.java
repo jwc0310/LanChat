@@ -2,21 +2,26 @@ package com.example.mysocket;
 
 import java.util.List;
 
+import com.example.audio.MyAudioManager;
+
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MessageAdapter extends BaseAdapter {
 
 	private static String TAG = "Andy";
 	
 	private Context context;
-	private List<MessageVo> messageVo;
-	
-	public MessageAdapter(Context context, List<MessageVo> messageVo){
+	private List<Msg> messageVo;
+	MyAudioManager myAudio = new MyAudioManager();
+	public MessageAdapter(Context context, List<Msg> messageVo){
 		this.context = context;
 		this.messageVo = messageVo;
 	}
@@ -44,17 +49,17 @@ public class MessageAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		
 		ViewHolder holder = null;
-		MessageVo message = messageVo.get(position);
+		final Msg message = messageVo.get(position);
 		int type = message.getType();
 		switch(type){
-		case MessageVo.MESSAGE_MSG:
+		case Msg.MESSAGE_MSG:
 			if( convertView == null || (holder = (ViewHolder)convertView.getTag()).flag != message.getDir()){
 				holder = new ViewHolder();
-				if(message.getDir() == MessageVo.MESSAGE_FROM){
-					holder.flag = MessageVo.MESSAGE_FROM;
+				if(message.getDir() == Msg.MESSAGE_FROM){
+					holder.flag = Msg.MESSAGE_FROM;
 					convertView = LayoutInflater.from(context).inflate(R.layout.from_item, null);
 				}else{
-					holder.flag = MessageVo.MESSAGE_TO;
+					holder.flag = Msg.MESSAGE_TO;
 					convertView = LayoutInflater.from(context).inflate(R.layout.to_item, null);
 				}
 				
@@ -68,11 +73,24 @@ public class MessageAdapter extends BaseAdapter {
 			
 			holder.content.setText(message.getContent());
 			holder.time.setText(message.getTime());
+			holder.content.setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					if(null == message.getPath()){
+						Log.i("Andy", "I am Clicked now");
+					}else{
+						myAudio.startPlay(message.getPath());
+					}
+				}
+				
+			});
 			break;
-		case MessageVo.MESSAGE_AUD:
+		case Msg.MESSAGE_AUD:
 			
 			break;
-		case MessageVo.MESSAGE_PIC:
+		case Msg.MESSAGE_PIC:
 			break;
 		}
 		

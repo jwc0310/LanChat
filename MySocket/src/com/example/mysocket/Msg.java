@@ -1,6 +1,6 @@
 package com.example.mysocket;
 
-public class MessageVo {
+public class Msg {
 
 	public static final int MESSAGE_FROM = 0;
 	public static final int MESSAGE_TO =1;
@@ -13,13 +13,19 @@ public class MessageVo {
 	private String content;
 	private String time;
 	private int msgType;
+	private String path;
 	
-	public MessageVo(int dir,String content,String time,int msgType){
+	public Msg(){
+		
+	}
+	
+	public Msg(int dir,String content,String time,int msgType,String path){
 		
 		this.dir = dir;
 		this.content = content;
 		this.time = time;
 		this.msgType = msgType;
+		this.path = path;
 	}
 	
 	public int getDir(){
@@ -51,6 +57,14 @@ public class MessageVo {
 	
 	public int getType(){
 		return msgType;
+	}
+	
+	public String getPath(){
+		return path;
+	}
+	
+	public void setPath(String path){
+		this.path = path;
 	}
 	
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Environment;
 import android.util.Log;
@@ -11,10 +12,14 @@ import android.util.Log;
 public class MyAudioManager{
 
 	MediaRecorder mRecorder = null;
+	MediaPlayer mPlayer = null;
 	private String dir;
 	private String currentFilePath;
 	
 	private static MyAudioManager audioInstance; //µ¥ÀýÄ£Ê½
+	public MyAudioManager(){
+		
+	}
 	private MyAudioManager(String dir){
 		this.dir = dir;
 	}
@@ -117,6 +122,28 @@ public class MyAudioManager{
 	
 	public String getCurrentPath(){
 		return currentFilePath;
+	}
+	
+	public void startPlay(String path){
+		mPlayer = new MediaPlayer();
+		try{
+			mPlayer.reset();
+			mPlayer.setDataSource(path);
+			if(!mPlayer.isPlaying()){
+				mPlayer.prepare();
+				mPlayer.start();
+			}else{
+				mPlayer.pause();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	public void stopPlay(){
+		if(mPlayer.isPlaying()){
+			mPlayer.stop();
+			mPlayer.release();
+		}
 	}
 	
 }

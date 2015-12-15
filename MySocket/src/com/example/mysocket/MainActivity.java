@@ -26,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
@@ -46,7 +47,7 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
 	private ToggleButton toggle;
 	private EditText et;
 	private TextView inputIP,edit;
-	private List<MessageVo> messageList = new ArrayList<MessageVo>();
+	private List<Msg> messageList = new ArrayList<Msg>();
 	private ListView list;
 	
 	LinearLayout ll_input;
@@ -73,7 +74,8 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
             .detectLeakedSqlLiteObjects().penaltyLog().penaltyDeath()  
             .build());
 		}
-        
+     // 启动activity时不自动弹出软键盘
+ 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         initWidget();
         
         list.setAdapter(myAdapter);
@@ -105,7 +107,7 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
 			Log.i("Andy","time is "+second);
 			Log.i("Andy","filePath "+filePath);
 			Toast.makeText(getApplication(), "time is "+second+"filePath "+filePath, Toast.LENGTH_LONG).show();
-			messageList.add(new MessageVo(MessageVo.MESSAGE_TO,filePath+","+String.valueOf(Math.ceil(second)),Tools.getCurrentTime(),MessageVo.MESSAGE_MSG));
+			messageList.add(new Msg(Msg.MESSAGE_TO,String.valueOf(Math.ceil(second))+"”((",Tools.getCurrentTime(),Msg.MESSAGE_MSG,filePath));
 			myAdapter.notifyDataSetChanged();
 		}
 
@@ -128,7 +130,7 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
     		// TODO Auto-generated method stub
     		String str = null;
     		while(true){
-    			Log.i("Andy", "true");
+    			//Log.i("Andy", "true");
     			try{
     				if((str = br.readLine())!= null){
     					Log.i("Andy", str+="\n");
@@ -137,7 +139,7 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
     					Log.i("time----:", time);
     					
     					if(str != null){
-    						messageList.add(new MessageVo(MessageVo.MESSAGE_FROM,str,time,MessageVo.MESSAGE_MSG));
+    						messageList.add(new Msg(Msg.MESSAGE_FROM,str,time,Msg.MESSAGE_MSG,null));
     						myAdapter.notifyDataSetChanged();
     					}
     				}
@@ -158,22 +160,26 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
 			connectServer();
 			break;
 		case R.id.send:
-			String sendMessage = edit.getText().toString();
-			sendMessage(sendMessage);
+			String body = edit.getText().toString();
+			if(null == body || body.length()<=0){
+				Toast.makeText(this, "消息不能为空", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			
+			sendMessage(body);
 			String time = Tools.getCurrentTime();
 			Log.i("time----:", time);
 			
-			if(sendMessage != null){
-				messageList.add(new MessageVo(MessageVo.MESSAGE_TO,sendMessage,time,MessageVo.MESSAGE_MSG));
-				myAdapter.notifyDataSetChanged();
-			}
+			messageList.add(new Msg(Msg.MESSAGE_TO,body,time,Msg.MESSAGE_MSG,null));
+			myAdapter.notifyDataSetChanged();
+			
 			edit.setText("");
 			break;
 		}
 	}
 	
     private void connectServer(){
-    	String ip = inputIP.getText().toString().trim();
+    	String ip = "192.168.1.59";//inputIP.getText().toString().trim();
     	int port = 54321;
     	
     	if(client == null){
