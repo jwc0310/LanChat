@@ -16,7 +16,7 @@ import java.util.List;
 import com.example.view.AudioRecordButton;
 import com.example.view.AudioRecordButton.AudioRecordFinishListener;
 
-import Tools.Tools;
+import Tools.AndyDate;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -107,7 +107,7 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
 			Log.i("Andy","time is "+second);
 			Log.i("Andy","filePath "+filePath);
 			Toast.makeText(getApplication(), "time is "+second+"filePath "+filePath, Toast.LENGTH_LONG).show();
-			messageList.add(new Msg(Msg.MESSAGE_TO,String.valueOf(Math.ceil(second))+"¡±((",Tools.getCurrentTime(),Msg.MESSAGE_MSG,filePath));
+			messageList.add(new Msg(Msg.MESSAGE_TO,String.valueOf(Math.ceil(second))+"¡±((",AndyDate.getCurrentTime(),Msg.MESSAGE_MSG,filePath));
 			myAdapter.notifyDataSetChanged();
 		}
 
@@ -135,7 +135,7 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
     				if((str = br.readLine())!= null){
     					Log.i("Andy", str+="\n");
 
-    					String time = Tools.getCurrentTime();
+    					String time = AndyDate.getCurrentTime();
     					Log.i("time----:", time);
     					
     					if(str != null){
@@ -167,7 +167,7 @@ public class MainActivity extends Activity implements OnClickListener,OnCheckedC
 			}
 			
 			sendMessage(body);
-			String time = Tools.getCurrentTime();
+			String time = AndyDate.getCurrentTime();
 			Log.i("time----:", time);
 			
 			messageList.add(new Msg(Msg.MESSAGE_TO,body,time,Msg.MESSAGE_MSG,null));

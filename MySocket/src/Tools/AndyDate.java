@@ -3,8 +3,8 @@ package Tools;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Tools {
-	public Tools(){
+public class AndyDate {
+	public AndyDate(){
 		
 	}
 	public static final String getCurrentTime(){
